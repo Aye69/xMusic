@@ -1,9 +1,11 @@
 const Discord = require('discord.js');
 const MusicBot = require('discord-music-system');
+
 const fs = require('fs')
 const { config } = require("dotenv");
 const { Client, Collection } = require("discord.js");
 const { prefix } = require("./config/config.json");
+
 const client = new Discord.Client();
 
 
@@ -14,25 +16,12 @@ client.categories = fs.readdirSync("./commands/");
 config({
     path: __dirname + "/.env"
 });
-
 ["command"].forEach(handler => {
     require(`./handlers/${handler}`)(client);
 });
-
-const actvs = [
-    "$help",
-    "ew"
-];
-client.on('ready', () => {
-    client.user.setActivity(actvs[Math.floor(Math.random() * (actvs.length - 1) + 1)]);
-    setInterval(() => {
-        client.user.setActivity(actvs[Math.floor(Math.random() * (actvs.length - 1) + 1)]);
-    }, 10000);
-});
-
 const bot = new MusicBot({
-    botPrefix: '$',
-    ytApiKey: 'AIzaSyBZThz2i6Q9DY3bJjNbvmk3Q3leiMZezz4',
+    botPrefix: '$', // Change It With Your Prefix You Like
+    ytApiKey: 'YOUTUBE_API_HERE', // Type your youtube API here
     botClient: client
 });
 client.on('message', message => { 
@@ -50,7 +39,6 @@ client.on("message", async message => {
     const cmd = args.shift().toLowerCase();
     
     if (cmd.length === 0) return;
-    
     let command = client.commands.get(cmd);
     if (!command) command = client.commands.get(client.aliases.get(cmd));
     if (command) 
