@@ -4,7 +4,7 @@ const MusicBot = require('discord-music-system');
 const fs = require('fs')
 const { config } = require("dotenv");
 const { Client, Collection } = require("discord.js");
-const { prefix } = require("./config/config.json");
+const { prefix } = require(process.env.PREFIX);
 
 const client = new Discord.Client();
 
