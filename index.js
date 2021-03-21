@@ -1,10 +1,9 @@
 const Discord = require('discord.js');
 const MusicBot = require('discord-music-system');
-
 const fs = require('fs')
-const { config } = require("dotenv");
+
 const { Client, Collection } = require("discord.js");
-const { prefix } = process.env.PREFIX
+const { prefix, token } = require('./config.json')
 
 const client = new Discord.Client();
 
@@ -44,4 +43,4 @@ client.on("message", async message => {
     if (command) 
         command.run(client, message, args);
 });
-client.login(process.env.TOKEN);
+client.login(token);
